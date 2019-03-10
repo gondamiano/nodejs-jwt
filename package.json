@@ -1,0 +1,26 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "backend using nodejs and jwt. mySql for the database",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:gondamiano/nodejs-jwt.git"
+  },
+  "keywords": [
+    "nodejs",
+    "jwt",
+    "mysql"
+  ],
+  "author": "Gonzalo Damiano",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
