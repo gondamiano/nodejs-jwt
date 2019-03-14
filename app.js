@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql');
 const http = require('http');
 var db = require('./config/database');
-var routes = require('./app/routes/router');
+var userRouter = require('./app/routes/user-router');
 const hostname = '127.0.0.1';
 const port = 2000;
 
@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 
-app.use('/', routes);
+app.use('/users', userRouter);
 
 app.use(express.static(path.join(__dirname, 'public')))
 

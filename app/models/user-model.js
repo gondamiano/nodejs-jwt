@@ -1,33 +1,35 @@
-var db = require('../../config/database');
+const {sequelize, Sequelize} = require('../../config/database');
 
-var userModel = {
-	getAllUser: getAllUser,
-	getUserById: getUserById,
-}
+module.exports = function(sequelize, Sequelize) {
+	const User = sequelize.define('users', {
+		id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+		first_name: {type: Sequelize.STRING, allowNull: false},
+		last_name: {type: Sequelize.STRING, allowNull: false},
+		email: {type: Sequelize.STRING, allowNull: false, validate: {isEmail: true}},
+		password:  {type: Sequelize.STRING, allowNull: false},
+		created:  {type: Sequelize.DATE, defaultValue: Sequelize.NOW, allowNull: false},
+		modified:  {type: Sequelize.DATE},
+		}, {
+		timestamps: false,
+	});
 
-function getAllUser() {
-	return new Promise((resolve,reject) => {
-		db.query('SELECT * FROM users', (err, rows, fields) => {
-			if(err) {
-				reject(err);
-			} else {
-				resolve(rows);
-			}
+	User.Instance.prototype.getAllUser = function() {
+			return User.findAll().then((users) => {
+				return users;
+			})
+			.catch(err => {
+				throw new Error('Error : ' + err)
+			})
+	}
+
+	User.Instance.prototype.getUserById = function(id) {
+		return User.findByPk(id).then(user => {
+			return user;
 		})
-	})
-}
-
-function getUserById(id) {
-	return new Promise((resolve, reject) => {
-		db.query(`SELECT * from users WHERE id = ${id}`, (err, rows, fields) => {
-			if(err) {
-				reject(err);
-			}
-			else {
-				resolve(rows);
-			}
+		.catch(err => {
+			throw new Error('Error : ' + err)
 		})
-	})
-}
+	}
 
-module.exports = userModel
+	return User;
+}

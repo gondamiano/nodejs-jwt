@@ -1,5 +1,28 @@
 var mysql = require('mysql');
+var config = require('./config.js');
+const Sequelize = require('sequelize');
 
+const sequelize = new Sequelize(config.database, config.user, config.password, {
+    host: config.host,
+    dialect: 'mysql',
+    operatorsAliases: false,
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+});
+
+sequelize.authenticate().then(() => {
+    console.log('connection succesfully');
+})
+.catch((err) => {
+    console.log('mm fallo');
+})
+
+/*
  var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
@@ -12,5 +35,10 @@ connection.connect((err) => {
 	else
 	 console.log("error con la base de datos : " + err);
 })
+*/
 
-module.exports = connection;
+
+module.exports = {
+    sequelize,
+    Sequelize,
+}

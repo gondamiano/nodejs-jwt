@@ -1,4 +1,4 @@
-const userModel = require('../models/user-model.js')
+const User = require('../models/user-model.js')
 
 var userService = {
 	getAllUser: getAllUser,
@@ -7,7 +7,7 @@ var userService = {
 
 function getAllUser() {
 	return new Promise((resolve, reject) => {
-		userModel.getAllUser().then((data) => {
+		User.getAllUser().then((data) => {
 			resolve(data);
 		}).catch((err) => {
 			reject(err);
@@ -16,9 +16,8 @@ function getAllUser() {
 }
 
 function getUserById(id) {
-	console.log(id);
 	return new Promise((resolve, reject) => {
-		userModel.getUserById(id).then((data) => {
+		User.getUserById(id).then((data) => {
 			resolve(data);
 		}).catch((err) => {
 			reject(err);
