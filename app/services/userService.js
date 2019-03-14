@@ -1,4 +1,4 @@
-const User = require('../models/user-model.js')
+const db = require('../models');
 
 var userService = {
 	getAllUser: getAllUser,
@@ -7,20 +7,23 @@ var userService = {
 
 function getAllUser() {
 	return new Promise((resolve, reject) => {
-		User.getAllUser().then((data) => {
-			resolve(data);
-		}).catch((err) => {
-			reject(err);
+			console.log("estaaa" + db.users);
+		db.users.findAll().then((users) => {
+			resolve(users);
+		})
+		.catch(err => {
+			throw new Error('Error : ' + err)
 		})
 	})
 }
 
 function getUserById(id) {
 	return new Promise((resolve, reject) => {
-		User.getUserById(id).then((data) => {
-			resolve(data);
-		}).catch((err) => {
-			reject(err);
+		db.users.findByPk(id).then(user => {
+			resolve(user);
+		})
+		.catch(err => {
+			throw new Error('Error : ' + err)
 		})
 	})
 }
