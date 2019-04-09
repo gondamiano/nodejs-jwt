@@ -5,7 +5,7 @@ var router = require('express').Router();
 router.use((req, res, next) => {
 	console.log(`${new Date().toDateString()} ${new Date().toLocaleTimeString()} Request:  ${req.method} ${req.url}  `);
 	next();
-})
+});
 
 router.get('/', (req, res) => {
 	userService.getAllUser().then((data) => {
@@ -24,6 +24,7 @@ router.get('/:id', (req, res) => {
 		res.send(" Error: " + err);
 	})
 })
+
 
 //validate the parameter before the request
 router.param('id', (req, res, next, id) => {

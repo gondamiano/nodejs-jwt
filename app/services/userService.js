@@ -5,6 +5,7 @@ var userService = {
 	getUserById: getUserById,
 }
 
+//// Get all users
 function getAllUser() {
 	return new Promise((resolve, reject) => {
 			console.log("estaaa" + db.users);
@@ -17,10 +18,11 @@ function getAllUser() {
 	})
 }
 
+
 function getUserById(id) {
 	return new Promise((resolve, reject) => {
 		db.users.findByPk(id).then(user => {
-			resolve(user);
+			resolve(user.fullName);
 		})
 		.catch(err => {
 			throw new Error('Error : ' + err)
