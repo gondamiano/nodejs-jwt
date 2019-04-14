@@ -19,9 +19,14 @@ router.get('/:id', (req, res) => {
 	let userId = req.id;
 	if(userId)
 	userService.getUserById(userId).then((data) => {
-		res.send(data)
+		if(data) {
+			res.status(200).send(data)
+		}
+		else {
+			res.status(404).send("Error");
+		}
 	}).catch((err) => {
-		res.send(" Error: " + err);
+		res.status(500).send(err);
 	})
 })
 

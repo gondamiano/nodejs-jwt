@@ -24,9 +24,11 @@ module.exports = (sequelize, Sequelize) => {
 				console.log("Error al generar el TOKEN");
 				throw new Error("TODO SE ACABO SE SEñORES");
 			}
-			token = buffer.toString();
+			token = buffer.toString('hex');
 			console.log("ACA ESTA ESTAOOOOO :" +  UserId);
-			return AuthToken.create({ token, userId: UserId })
+			AuthToken.create({ token, userId: UserId }).then(data => {
+				return data.token;
+			})
 		})
 	}
 

@@ -23,13 +23,14 @@ app.use(bodyParser.json());
 app.use('/', router);
 app.use('/users', userRouter);
 app.use('/stores', storeRouter);
-
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
 
 	app.listen(port, hostname, () => {
 		console.log('server running on port: ' + port);
 	});
 })
+
+module.exports = app

@@ -9,7 +9,6 @@ const sequelize = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql',
     operatorsAliases: false,
-
     pool: {
         max: 5,
         min: 0,
@@ -30,7 +29,6 @@ fs.readdirSync(__dirname)
     })
     .forEach(file => {
     var model = sequelize['import'](path.join(__dirname, file));
-    console.log(file);
     db[model.name] = model;
 });
 

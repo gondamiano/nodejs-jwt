@@ -25,5 +25,9 @@
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.10",
     "sequelize": "^4.43.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0"
   }
 }

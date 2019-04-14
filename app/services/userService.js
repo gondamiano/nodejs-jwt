@@ -22,7 +22,7 @@ function getAllUser() {
 function getUserById(id) {
 	return new Promise((resolve, reject) => {
 		db.users.findByPk(id).then(user => {
-			resolve(user.fullName);
+			resolve(user);
 		})
 		.catch(err => {
 			throw new Error('Error : ' + err)
